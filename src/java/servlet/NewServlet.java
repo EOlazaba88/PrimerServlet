@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,10 @@ public class NewServlet extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         String sexo = request.getParameter("sexo");
-        String movie = request.getParameter("movie");
+        String[] results = request.getParameterValues("movie");
+        for (String result : results) {
+            System.out.println(result);
+        }
         response.setContentType("text/html;charset=UTF8");
         PrintWriter out = response.getWriter();
         out.println("<DOCTYPE html>");
@@ -32,7 +36,7 @@ public class NewServlet extends HttpServlet {
         out.println("<br>"+"El usuario es: "+ usuario+"<br>");
         out.println("<br>"+"La contraseña es: "+ password);
         out.println("<br>"+"Sexo: "+ sexo);
-        out.println("<br>"+"Sus peliculas favoritas incluyen: "+ movie);
+        out.println("<br>"+"Sus peliculas favoritas incluyen: "+ Arrays.toString(results));
         out.println("<div>DO POST</div>");
         out.println("</body>");
         out.println("</html>");
